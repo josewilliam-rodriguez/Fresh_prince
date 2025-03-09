@@ -1,12 +1,16 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import ModalAddCollections from './ModalAddCollections';
 
 const Collections = () => {
   const [open, setOpen] = useState(false);
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
-  const adminSession = JSON.parse(localStorage.getItem("adminSession"));
+  
+  // Obtener sesión del usuario
+  const adminSession = JSON.parse(localStorage.getItem("userSession"));
+
+  console.log("adminSession:", adminSession); // Depuración
 
   const fetchCollections = async () => {
     setLoading(true);
@@ -23,11 +27,13 @@ const Collections = () => {
   useEffect(() => {
     fetchCollections();
   }, []);
+
   return (
     <Box sx={{ padding: "2rem" }}>
       <Typography variant="h4" gutterBottom>Collections</Typography>
 
-      {adminSession && (
+      {/* Mostrar botón solo si el usuario es admin */}
+      {adminSession?.role?.toLowerCase() === "admin" && (
         <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
           Agregar Colección
         </Button>
@@ -50,14 +56,19 @@ const Collections = () => {
                 <img src={col.imagen_2} alt={col.nombre} style={{ width: "150px", marginTop: "10px" }} />
                 <img src={col.imagen_3} alt={col.nombre} style={{ width: "150px", marginTop: "10px" }} />
                 <img src={col.imagen_4} alt={col.nombre} style={{ width: "150px", marginTop: "10px" }} />
-              
               </Box>
             ))
           )}
         </Box>
       )}
 
-      <ModalAddCollections open={open} handleClose={() => setOpen(false)} fetchCollections={fetchCollections} />
+      {/* Pasamos setCollections a ModalAddCollections */}
+      <ModalAddCollections 
+        open={open} 
+        handleClose={() => setOpen(false)} 
+        fetchCollections={fetchCollections} 
+        setCollections={setCollections}
+      />
     </Box>
   )
 }
