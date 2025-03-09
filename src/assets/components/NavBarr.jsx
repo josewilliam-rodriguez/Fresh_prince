@@ -4,12 +4,15 @@ import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../context/userContext'
 import Logo from '../images/logo.png'
+import ModalAdmin from './ModalAdmin';
 
 const NavBarr = () => {
   const { context, setContext } = useContext(AppContext)
+  const [open, setOpen] = useState(false)
 
 
   return (
+    <>
     <AppBar position="sticky" sx={{ backgroundColor: "#fff", boxShadow: "none", padding: "0.5rem 2rem" }}>
     <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       
@@ -27,12 +30,14 @@ const NavBarr = () => {
           <AddShoppingCartIcon  />
         </IconButton>
 
-        <IconButton component={Link} to="/Profile">
+        <IconButton onClick={() => setOpen(true)}>
           <Avatar alt={context.nombre} src={context.profile || ""} />
         </IconButton>
       </Box>
     </Toolbar>
   </AppBar>
+        <ModalAdmin open={open} handleClose={() => setOpen(false)} />
+  </>
 );
 };
 

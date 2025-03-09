@@ -2,6 +2,8 @@ import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { AppContext } from '../context/userContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavBarr from '../assets/components/NavBarr'
+import ModalAddCollections from '../assets/components/ModalAddCollections'
+import Private from './Private'
 
 
 const Login = lazy(() => import('../assets/components/Login'))
@@ -42,7 +44,14 @@ const AppRouter = () => {
             <Route path="/Profile" element={<Profile/>} />
             <Route path="/ShoppingCart" element={<ShoppingCart/>} />
 
-
+            <Route
+              path="/admin/add-collection"
+              element={
+                <Private>
+                  <ModalAddCollections />
+                </Private>
+              }
+            />
 
         </Routes>
         </Suspense>
