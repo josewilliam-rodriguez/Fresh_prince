@@ -5,7 +5,6 @@ import NavBarr from '../assets/components/NavBarr'
 import ModalAddCollections from '../assets/components/ModalAddCollections'
 import Private from './Private'
 
-
 const Login = lazy(() => import('../assets/components/Login'))
 const App = lazy(() => import('../App'))
 const Register = lazy(() => import('../assets/components/Register'))
@@ -13,7 +12,7 @@ const Shop = lazy(() => import('../assets/components/Shop'))
 const Collections = lazy(() => import('../assets/components/Collections'))
 const Profile = lazy(() => import('../assets/components/Profile'))
 const ShoppingCart = lazy(() => import('../assets/components/ShoppingCart'))
-
+const ProducDetai = lazy(() => import('../assets/components/ProducDetai'))
 
 const AppRouter = () => {
   const [autenticado, setAutenticado] = useState(false)
@@ -43,7 +42,7 @@ const AppRouter = () => {
             <Route path="/Collections" element={<Collections/>} />
             <Route path="/Profile" element={<Profile/>} />
             <Route path="/ShoppingCart" element={<ShoppingCart/>} />
-
+            <Route path="/shop/:id" element={<ProducDetai/>} />
             <Route
               path="/admin/add-collection"
               element={
