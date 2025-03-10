@@ -92,7 +92,7 @@ const ProducDetai = () => {
 
           {/* Botones */}
           <Button variant="contained" color="primary" fullWidth sx={{ mb: 2 }}>
-            Agregar al carrito
+            Sumar al carrito
           </Button>
           <Button variant="outlined" color="primary" fullWidth>
             Comprar ahora
